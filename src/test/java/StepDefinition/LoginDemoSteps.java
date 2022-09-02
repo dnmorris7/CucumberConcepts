@@ -12,6 +12,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import io.cucumber.java.en.*;
 import pages.LoginPage;
 
+@Deprecated
 public class LoginDemoSteps {
 	// initialize logger
 	private static Logger log = Logger.getLogger("LoginDemoSteps.class");
