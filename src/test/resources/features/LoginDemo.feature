@@ -9,5 +9,5 @@ Scenario Outline: Check login is successful with valid credentials
 	
 	Examples:
 	| username | password |
-	| user1 | pass1 |
-	| user2 | pass2 |
+	| Raghav | 12345 |
+	| Ele | 12345 |
