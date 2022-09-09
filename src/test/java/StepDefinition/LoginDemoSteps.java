@@ -4,15 +4,21 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 
-import io.cucumber.java.en.*;
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import pages.LoginPage;
 
-@Deprecated
+
 public class LoginDemoSteps {
 	// initialize logger
 	private static Logger log = Logger.getLogger("LoginDemoSteps.class");
@@ -69,8 +75,8 @@ public class LoginDemoSteps {
 	 * }
 	 */
 
-	@Given("demo test browser is open")
-	public void demo_test_browser_is_open() {
+	@Before
+	public void setup() {
 		Logger.getAnonymousLogger().setLevel(Level.INFO);
 		System.out.println("=====LOGIN_DEMO_INITIALIZE=====");
 		String projectPath = System.getProperty("user.dir")+"\\src\\test\\resources\\drivers\\";
@@ -78,6 +84,17 @@ public class LoginDemoSteps {
 
 		System.setProperty("webdriver.edge.driver", projectPath+"msedgedriver.exe");
 		driver = new EdgeDriver();
+		
+	}
+	
+	@After
+	public void teardown() {
+		loginPage.quit();
+	}
+	
+	@Given("demo test browser is open")
+	public void demo_test_browser_is_open() {
+		
 		driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
 		driver.manage().timeouts().pageLoadTimeout(40, TimeUnit.SECONDS);
 
@@ -114,7 +131,7 @@ public class LoginDemoSteps {
 	@Then("user is navigated to the homepage")
 	public void user_is_navigated_to_the_homepage() {
 		loginPage.validateLogoutButton();
-		loginPage.quit();
+		
 
 	}
 }
